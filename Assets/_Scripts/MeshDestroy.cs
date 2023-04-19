@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class MeshDestroy : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MeshDestroy : MonoBehaviour
 
     public int CutCascades = 1;
     public float ExplodeForce = 0;
+
+    public Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -67,16 +70,15 @@ public class MeshDestroy : MonoBehaviour
             subParts.Clear();
         }
 
+        rb.GetComponent<XRGrabInteractable>().colliders.Clear();
+
         for (var i = 0; i < parts.Count; i++)
         {
-            parts[i].MakeGameobject(this);
+            parts[i].MakeGameobject(this, rb);
             parts[i].GameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
-            parts[i].GameObject.AddComponent<SpringJoint>();
-            if (i != 0)
-            {
-                parts[i].GameObject.GetComponent<SpringJoint>().connectedBody = parts[i - 1].GameObject.GetComponent<Rigidbody>();
-            }
         }
+
+        Destroy(rb.GetComponent<FixedJoint>());
 
         Destroy(gameObject);
     }
@@ -270,9 +272,10 @@ public class MeshDestroy : MonoBehaviour
                 Triangles[i] = _Triangles[i].ToArray();
         }
 
-        public void MakeGameobject(MeshDestroy original)
+        public void MakeGameobject(MeshDestroy original, Rigidbody rb)
         {
             GameObject = new GameObject(original.name);
+            GameObject.transform.parent = rb.transform;
             GameObject.transform.position = original.transform.position;
             GameObject.transform.rotation = original.transform.rotation;
             GameObject.transform.localScale = original.transform.localScale;
@@ -300,7 +303,13 @@ public class MeshDestroy : MonoBehaviour
             var meshDestroy = GameObject.AddComponent<MeshDestroy>();
             meshDestroy.CutCascades = original.CutCascades;
             meshDestroy.ExplodeForce = original.ExplodeForce;
+            meshDestroy.rb = rb;
 
+            var joint = GameObject.AddComponent<SpringJoint>();
+            joint.connectedBody = rb;
+            joint.spring = 1000;
+
+            rb.GetComponent<XRGrabInteractable>().colliders.Add(collider);
         }
 
     }
