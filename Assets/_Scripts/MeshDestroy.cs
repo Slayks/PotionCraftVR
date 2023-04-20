@@ -70,7 +70,9 @@ public class MeshDestroy : MonoBehaviour
             subParts.Clear();
         }
 
-        rb.GetComponent<XRGrabInteractable>().colliders.Clear();
+        // Remove all collider on grab interractable script
+        XRGrabInteractable rbXRGrabInteractableSCript = rb.GetComponent<XRGrabInteractable>();
+        rbXRGrabInteractableSCript.colliders.Clear();
 
         for (var i = 0; i < parts.Count; i++)
         {
@@ -78,7 +80,16 @@ public class MeshDestroy : MonoBehaviour
             parts[i].GameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
         }
 
-        Destroy(rb.GetComponent<FixedJoint>());
+        // If the parent jointed component still has is fixed joint, remove it
+        FixedJoint rbFixedJoint = rb.GetComponent<FixedJoint>();
+        if (rbFixedJoint != null)
+        {
+            Destroy(rbFixedJoint);
+        }
+
+        // Disable and enable back the XRGrabInteractable script to make it take new collider list in count
+        rbXRGrabInteractableSCript.enabled = false;
+        rbXRGrabInteractableSCript.enabled = true;
 
         Destroy(gameObject);
     }
@@ -305,9 +316,12 @@ public class MeshDestroy : MonoBehaviour
             meshDestroy.ExplodeForce = original.ExplodeForce;
             meshDestroy.rb = rb;
 
-            var joint = GameObject.AddComponent<SpringJoint>();
+            var joint = GameObject.AddComponent<HingeJoint>();
             joint.connectedBody = rb;
-            joint.spring = 1000;
+            //joint.spring = 10;
+            //joint.damper = 10;
+            //joint.autoConfigureConnectedAnchor = false;
+            //joint.connectedAnchor = new Vector3(GameObject.transform.position.x, GameObject.transform.position.y + 1, GameObject.transform.position.z);
 
             rb.GetComponent<XRGrabInteractable>().colliders.Add(collider);
         }
