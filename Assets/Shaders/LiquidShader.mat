@@ -70,6 +70,7 @@ Material:
     - _BASE_COLOR_WEIGHT: 1
     - _BUMP_MAP_STRENGTH: 0.3
     - _EMISSION_WEIGHT: 1
+    - _File: 0.635
     - _METALNESS: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -77,10 +78,14 @@ Material:
     - _REFLECTIONS_ROUGHNESS: 1
     - _REFLECTIONS_WEIGHT: 1
     - _TRANSPARENCY: 0
+    - _WobbleX: -0.22
+    - _WobbleZ: -0.12
     m_Colors:
     - _BASE_COLOR: {r: 1, g: 1, b: 1, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _REFLECTIONS_COLOR: {r: 1, g: 1, b: 1, a: 1}
+    - _SideColor: {r: 0.27248004, g: 0.7830189, b: 0.22530258, a: 1}
+    - _TopColor: {r: 0.2779651, g: 0.7735849, b: 0.20799215, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4427714172594838161
 MonoBehaviour:
