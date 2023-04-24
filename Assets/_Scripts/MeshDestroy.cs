@@ -324,7 +324,6 @@ public class MeshDestroy : MonoBehaviour
             joint.spring = 1000;
             joint.damper = 0.5f;
             joint.autoConfigureConnectedAnchor = false;
-            //joint.connectedAnchor = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
 
             rb.GetComponent<XRGrabInteractable>().colliders.Add(collider);
         }
