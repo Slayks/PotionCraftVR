@@ -77,7 +77,7 @@ public class MeshDestroy : MonoBehaviour
         for (var i = 0; i < parts.Count; i++)
         {
             parts[i].MakeGameobject(this, rb);
-            parts[i].GameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
+            parts[i].gameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
         }
 
         // If the parent jointed component still has is fixed joint, remove it
@@ -239,7 +239,7 @@ public class MeshDestroy : MonoBehaviour
         public Vector3[] Normals;
         public int[][] Triangles;
         public Vector2[] UV;
-        public GameObject GameObject;
+        public GameObject gameObject;
         public Bounds Bounds = new Bounds();
 
         public PartMesh()
@@ -285,11 +285,13 @@ public class MeshDestroy : MonoBehaviour
 
         public void MakeGameobject(MeshDestroy original, Rigidbody rb)
         {
-            GameObject = new GameObject(original.name);
-            GameObject.transform.parent = rb.transform;
-            GameObject.transform.position = original.transform.position;
-            GameObject.transform.rotation = original.transform.rotation;
-            GameObject.transform.localScale = original.transform.localScale;
+            gameObject = new GameObject(original.name);
+            gameObject.transform.parent = rb.transform;
+            gameObject.transform.position = original.transform.position;
+            gameObject.transform.rotation = original.transform.rotation;
+            gameObject.transform.localScale = original.transform.localScale;
+
+            gameObject.layer = 6;
 
             var mesh = new Mesh();
             mesh.name = original.GetComponent<MeshFilter>().mesh.name;
@@ -301,27 +303,28 @@ public class MeshDestroy : MonoBehaviour
                 mesh.SetTriangles(Triangles[i], i, true);
             Bounds = mesh.bounds;
 
-            var renderer = GameObject.AddComponent<MeshRenderer>();
+            var renderer = gameObject.AddComponent<MeshRenderer>();
             renderer.materials = original.GetComponent<MeshRenderer>().materials;
 
-            var filter = GameObject.AddComponent<MeshFilter>();
+            var filter = gameObject.AddComponent<MeshFilter>();
             filter.mesh = mesh;
 
-            var collider = GameObject.AddComponent<MeshCollider>();
+            var collider = gameObject.AddComponent<MeshCollider>();
             collider.convex = true;
 
-            var rigidbody = GameObject.AddComponent<Rigidbody>();
-            var meshDestroy = GameObject.AddComponent<MeshDestroy>();
+            var rigidbody = gameObject.AddComponent<Rigidbody>();
+            rigidbody.useGravity = false;
+            var meshDestroy = gameObject.AddComponent<MeshDestroy>();
             meshDestroy.CutCascades = original.CutCascades;
             meshDestroy.ExplodeForce = original.ExplodeForce;
             meshDestroy.rb = rb;
 
-            var joint = GameObject.AddComponent<HingeJoint>();
+            var joint = gameObject.AddComponent<SpringJoint>();
             joint.connectedBody = rb;
-            //joint.spring = 10;
-            //joint.damper = 10;
-            //joint.autoConfigureConnectedAnchor = false;
-            //joint.connectedAnchor = new Vector3(GameObject.transform.position.x, GameObject.transform.position.y + 1, GameObject.transform.position.z);
+            joint.spring = 1000;
+            joint.damper = 0.5f;
+            joint.autoConfigureConnectedAnchor = false;
+            //joint.connectedAnchor = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
 
             rb.GetComponent<XRGrabInteractable>().colliders.Add(collider);
         }
