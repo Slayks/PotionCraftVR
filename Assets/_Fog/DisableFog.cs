@@ -7,7 +7,7 @@ public class DisableFog : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.layer == 6)
         {
             this.gameObject.SetActive(false);
         }
