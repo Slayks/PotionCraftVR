@@ -9,7 +9,7 @@ public class Platform : MonoBehaviour
     private GameObject nodePrefab;
     private List<GameObject> displayedPathNodes = new List<GameObject>();
     private bool isMoving = false;
-    private float speed = 0.0001f;
+    private float speed = 10f;
 
     /// <summary>
     /// If the platform is not moving, display the path (Vector3 list) that the platform will follow when calling FollowPath
@@ -46,33 +46,34 @@ public class Platform : MonoBehaviour
     /// <summary>
     /// If there is a displayed path, move through the nodes and clean them
     /// </summary>
-    public void FollowPath()
+    IEnumerator FollowPath(Platform platform)
     {
         // Do something only if there is node displayed
-        if (this.displayedPathNodes.Count > 0)
+        if (platform.displayedPathNodes.Count > 0)
         {
             // Set isMoving to true to avoid displaying new path or removing current path
-            this.isMoving = true;
-            
-            this.displayedPathNodes.ForEach((node) =>
+            platform.isMoving = true;
+
+            for (int i = 0; i < platform.displayedPathNodes.Count; i++)
             {
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // FIXME Faire une coroutine sinon ça freeze
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                GameObject node = platform.displayedPathNodes[i];
 
                 // Move the platform and wait for it to have moved close enough to the node position before going out the loop
-                while (Vector3.Distance(this.transform.position, node.transform.position) > 0.05f) {
-                    Vector3 moveTo = Vector3.MoveTowards(this.transform.position, node.transform.position, this.speed * Time.deltaTime);
-                    this.transform.position = moveTo;
+                while (Vector3.Distance(platform.transform.position, node.transform.position) > 0.05f)
+                {
+                    Vector3 moveTo = Vector3.MoveTowards(platform.transform.position, node.transform.position, platform.speed * Time.deltaTime);
+                    platform.transform.position = moveTo;
+                    yield return new WaitForEndOfFrame();
                 };
                 // Destroy the node GameObject
                 Destroy(node);
-            });
+            }
             // Reset displayed node list
-            this.displayedPathNodes = new List<GameObject>();
+            platform.displayedPathNodes = new List<GameObject>();
             // Set moving to false to allow displaying path again
-            this.isMoving = false;
+            platform.isMoving = false;
         }
+        yield return new WaitForEndOfFrame();
     }
 
     // TEMP à supprimer
@@ -80,7 +81,7 @@ public class Platform : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && this.isMoving == false)
         {
-            this.FollowPath();
+            StartCoroutine(FollowPath(this));
         }
     }
 }
