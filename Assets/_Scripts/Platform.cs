@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class Platform : MonoBehaviour
 {
     [SerializeField]
-    private GameObject nodePrefab;
+    private GameObject enabledNodePrefab;
+    [SerializeField]
+    private GameObject disabledNodePrefab;
+
     private List<GameObject> displayedPathNodes = new List<GameObject>();
+    private int enabledNodeCount = 0;
     private bool isMoving = false;
     private float speed = 10f;
 
@@ -19,12 +25,22 @@ public class Platform : MonoBehaviour
     {
         if (!isMoving)
         {
-            path.ForEach((item) =>
+            for (int i = 0; i < path.Count; i++)
             {
+                Vector3 nodePosition = path[i];
                 Vector3 platformPosition = this.gameObject.transform.position;
-                GameObject node = Instantiate(nodePrefab, new Vector3(platformPosition.x + item.x, 0, platformPosition.z + item.z), Quaternion.identity);
+                GameObject node;
+                if (i < path.Count / 2)
+                {
+                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, 0, platformPosition.z + nodePosition.z), Quaternion.identity);
+                }
+                else
+                {
+                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, 0, platformPosition.z + nodePosition.z), Quaternion.identity);
+                }
                 this.displayedPathNodes.Add(node);
-            });
+            }
+            this.enabledNodeCount = path.Count / 2;
         }
     }
 
@@ -58,16 +74,21 @@ public class Platform : MonoBehaviour
             {
                 GameObject node = platform.displayedPathNodes[i];
 
-                // Create a duplicate of the node position to avoid taking Y position of the node into account while moving the platform
-                Vector3 platformHeightNodePosition = new Vector3(node.transform.position.x, platform.transform.position.y, node.transform.position.z);
-
-                // Move the platform and wait for it to have moved close enough to the node position before going out the loop
-                while (Vector3.Distance(platform.transform.position, platformHeightNodePosition) > 0.05f)
+                // If the node is enabled
+                if (i < platform.enabledNodeCount)
                 {
-                    Vector3 moveTo = Vector3.MoveTowards(platform.transform.position, platformHeightNodePosition, platform.speed * Time.deltaTime);
-                    platform.transform.position = moveTo;
-                    yield return new WaitForEndOfFrame();
-                };
+                    // Create a duplicate of the node position to avoid taking Y position of the node into account while moving the platform
+                    Vector3 platformHeightNodePosition = new Vector3(node.transform.position.x, platform.transform.position.y, node.transform.position.z);
+
+                    // Move the platform and wait for it to have moved close enough to the node position before going out the loop
+                    while (Vector3.Distance(platform.transform.position, platformHeightNodePosition) > 0.05f)
+                    {
+                        Vector3 moveTo = Vector3.MoveTowards(platform.transform.position, platformHeightNodePosition, platform.speed * Time.deltaTime);
+                        platform.transform.position = moveTo;
+                        yield return new WaitForEndOfFrame();
+                    };
+                }
+
                 // Destroy the node GameObject
                 Destroy(node);
             }

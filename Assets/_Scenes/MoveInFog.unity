@@ -699,7 +699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5cba85dba89d74a902139de5820b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 8452759861648501551, guid: 067fa01f81543ad449da5257f0044a41,
+  enabledNodePrefab: {fileID: 8452759861648501551, guid: 067fa01f81543ad449da5257f0044a41,
+    type: 3}
+  disabledNodePrefab: {fileID: 8032447711056431424, guid: 00793b3eaef11f94f8ae48c0f59510bc,
     type: 3}
 --- !u!1 &2000101669
 GameObject:
