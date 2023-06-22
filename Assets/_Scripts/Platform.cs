@@ -22,7 +22,7 @@ public class Platform : MonoBehaviour
             path.ForEach((item) =>
             {
                 Vector3 platformPosition = this.gameObject.transform.position;
-                GameObject node = Instantiate(nodePrefab, new Vector3(platformPosition.x + item.x, platformPosition.y + item.y, platformPosition.z + item.z), Quaternion.identity);
+                GameObject node = Instantiate(nodePrefab, new Vector3(platformPosition.x + item.x, 0, platformPosition.z + item.z), Quaternion.identity);
                 this.displayedPathNodes.Add(node);
             });
         }
@@ -58,10 +58,13 @@ public class Platform : MonoBehaviour
             {
                 GameObject node = platform.displayedPathNodes[i];
 
+                // Create a duplicate of the node position to avoid taking Y position of the node into account while moving the platform
+                Vector3 platformHeightNodePosition = new Vector3(node.transform.position.x, platform.transform.position.y, node.transform.position.z);
+
                 // Move the platform and wait for it to have moved close enough to the node position before going out the loop
-                while (Vector3.Distance(platform.transform.position, node.transform.position) > 0.05f)
+                while (Vector3.Distance(platform.transform.position, platformHeightNodePosition) > 0.05f)
                 {
-                    Vector3 moveTo = Vector3.MoveTowards(platform.transform.position, node.transform.position, platform.speed * Time.deltaTime);
+                    Vector3 moveTo = Vector3.MoveTowards(platform.transform.position, platformHeightNodePosition, platform.speed * Time.deltaTime);
                     platform.transform.position = moveTo;
                     yield return new WaitForEndOfFrame();
                 };
