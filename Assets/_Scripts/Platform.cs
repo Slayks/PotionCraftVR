@@ -59,6 +59,18 @@ public class Platform : MonoBehaviour
         }
     }
 
+    public void incrementEnabledNode()
+    {
+        if (this.enabledNodeCount < this.displayedPathNodes.Count)
+        {
+            this.enabledNodeCount++;
+            GameObject nodeToReplace = this.displayedPathNodes[this.enabledNodeCount - 1];
+            GameObject newNode = Instantiate(enabledNodePrefab, nodeToReplace.transform.position, Quaternion.identity);
+            Destroy(nodeToReplace);
+            this.displayedPathNodes[this.enabledNodeCount - 1] = newNode;
+        }
+    }
+
     /// <summary>
     /// If there is a displayed path, move through the nodes and clean them
     /// </summary>
@@ -106,6 +118,10 @@ public class Platform : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && this.isMoving == false)
         {
             StartCoroutine(FollowPath(this));
+        }
+        if (Input.GetKeyDown(KeyCode.A) && this.isMoving == false)
+        {
+            this.incrementEnabledNode();
         }
     }
 }
