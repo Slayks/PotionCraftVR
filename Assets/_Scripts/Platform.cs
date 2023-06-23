@@ -15,7 +15,7 @@ public class Platform : MonoBehaviour
     private List<GameObject> displayedPathNodes = new List<GameObject>();
     private int enabledNodeCount = 0;
     private bool isMoving = false;
-    private float speed = 10f;
+    private float speed = 5f;
 
     /// <summary>
     /// If the platform is not moving, display the path (Vector3 list) that the platform will follow when calling FollowPath
@@ -32,11 +32,11 @@ public class Platform : MonoBehaviour
                 GameObject node;
                 if (i < path.Count / 2)
                 {
-                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, 0, platformPosition.z + nodePosition.z), Quaternion.identity);
+                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 1, platformPosition.z + nodePosition.z), Quaternion.identity);
                 }
                 else
                 {
-                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, 0, platformPosition.z + nodePosition.z), Quaternion.identity);
+                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 1, platformPosition.z + nodePosition.z), Quaternion.identity);
                 }
                 this.displayedPathNodes.Add(node);
             }
