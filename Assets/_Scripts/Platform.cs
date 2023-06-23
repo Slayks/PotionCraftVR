@@ -32,11 +32,11 @@ public class Platform : MonoBehaviour
                 GameObject node;
                 if (i < path.Count / 2)
                 {
-                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 1, platformPosition.z + nodePosition.z), Quaternion.identity);
+                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
                 }
                 else
                 {
-                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 1, platformPosition.z + nodePosition.z), Quaternion.identity);
+                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
                 }
                 this.displayedPathNodes.Add(node);
             }
