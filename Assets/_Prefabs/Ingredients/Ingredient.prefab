@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2544598053111397193}
   - component: {fileID: 1585807371516786059}
   m_Layer: 0
-  m_Name: Furniture
+  m_Name: Ingredient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4230584288330358712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 423aca047055a98419a2392a32939183, type: 3}
+  m_Script: {fileID: 11500000, guid: 1725228bfb34aae488088bde47f6a0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   path:
@@ -57,7 +57,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  prefab: {fileID: 4389747130641419598, guid: 7f90c74e923b50b469c77f019bf39277, type: 3}
+  prefab: {fileID: 0}
 --- !u!54 &-2544598053111397193
 Rigidbody:
   m_ObjectHideFlags: 0

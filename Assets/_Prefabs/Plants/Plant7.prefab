@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5224040444280459837}
   - component: {fileID: 5224040444264089245}
+  - component: {fileID: 5823805613875726365}
   m_Layer: 0
   m_Name: Plant7
   m_TagString: Untagged
@@ -228,6 +229,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5224040444282360025}
   m_Enabled: 1
+--- !u!64 &5823805613875726365
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5224040444280426013}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 3409ea45e219ebe4c920298dbe9c7399, type: 3}
 --- !u!1 &5224040444280426015
 GameObject:
   m_ObjectHideFlags: 0

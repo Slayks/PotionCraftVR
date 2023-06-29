@@ -10,19 +10,19 @@ public class GrabDetector : MonoBehaviour
 
     void Start()
     {
-        Furniture.OnFurnitureGrabbed += DisplayPath;
-        Furniture.OnFurnitureDropped += RemoveDisplayedPath;
+        Ingredient.OnIngredientGrabbed += DisplayPath;
+        Ingredient.OnIngredientDropped += RemoveDisplayedPath;
     }
 
     private void OnDestroy()
     {
-        Furniture.OnFurnitureGrabbed -= DisplayPath;
-        Furniture.OnFurnitureDropped -= RemoveDisplayedPath;
+        Ingredient.OnIngredientGrabbed -= DisplayPath;
+        Ingredient.OnIngredientDropped -= RemoveDisplayedPath;
     }
 
-    public void DisplayPath(Furniture furniture)
+    public void DisplayPath(Ingredient ingredient)
     {
-        this.platform.DisplayPath(furniture.GetPath());
+        this.platform.DisplayPath(ingredient.GetPath());
     }
 
     public void RemoveDisplayedPath()

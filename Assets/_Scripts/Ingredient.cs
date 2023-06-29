@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Furniture : MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
     [SerializeField]
     private List<Vector3> path;
@@ -14,10 +14,10 @@ public class Furniture : MonoBehaviour
     private GameObject prefab;
     private GameObject instantiatedPrefab;
 
-    public delegate void FurnitureGrabbed(Furniture furniture);
-    public static event FurnitureGrabbed OnFurnitureGrabbed;
-    public delegate void FurnitureDropped();
-    public static event FurnitureDropped OnFurnitureDropped;
+    public delegate void IngredientGrabbed(Ingredient ingredient);
+    public static event IngredientGrabbed OnIngredientGrabbed;
+    public delegate void IngredientDropped();
+    public static event IngredientDropped OnIngredientDropped;
 
 
     private void Start()
@@ -28,8 +28,8 @@ public class Furniture : MonoBehaviour
     // TODO à remplacer par une branchement sur l'event de grab ou de ungrab
     public void OnMouseDown()
     {
-        Furniture.OnFurnitureDropped.Invoke();
-        Furniture.OnFurnitureGrabbed.Invoke(this);
+        Ingredient.OnIngredientDropped.Invoke();
+        Ingredient.OnIngredientGrabbed.Invoke(this);
     }
 
     public List<Vector3> GetPath()
