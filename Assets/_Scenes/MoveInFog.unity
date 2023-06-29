@@ -250,6 +250,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FogOfWar
       objectReference: {fileID: 0}
+    - target: {fileID: 6985307278086505344, guid: 3a38d955b56d9b040b405d24355d30bc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6985307278086505345, guid: 3a38d955b56d9b040b405d24355d30bc,
         type: 3}
       propertyPath: m_RootOrder
