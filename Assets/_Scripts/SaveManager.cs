@@ -93,7 +93,7 @@ public class SaveManager : MonoBehaviour
         
         // Read savefile, deserialize it and set the data to the existing inventory manager
         string json = System.IO.File.ReadAllText(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName);
-        InventoryManager tempInventory = JsonUtility.FromJson<InventoryManager>(json);
+        InventoryManager tempInventory = (InventoryManager)JsonUtility.FromJson(json, typeof(InventoryManager));
         inventoryManager.GetComponent<InventoryManager>().Inventory = tempInventory.Inventory;
         inventoryManager.GetComponent<InventoryManager>().Recipes = tempInventory.Recipes;
     }
