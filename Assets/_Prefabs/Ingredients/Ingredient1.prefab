@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2544598053111397193, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2544598053111397193, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4230584288330358710, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
         type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 4230584288330358712, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
         type: 3}
       propertyPath: m_Name
-      value: Furniture1
+      value: Ingredient1
       objectReference: {fileID: 0}
     - target: {fileID: 4230584288330358712, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
         type: 3}
@@ -78,6 +88,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8477549281889674979, guid: 0f2b63913cbc0ff4d94347fe55d2c9a1,
         type: 3}
+    - target: {fileID: 4230584288330358713, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
+        type: 3}
+      propertyPath: m_UseDynamicAttach
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4230584288330358713, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
         type: 3}
       propertyPath: path.Array.data[0].x
@@ -128,5 +143,6 @@ PrefabInstance:
       propertyPath: path.Array.data[9].x
       value: 22
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1585807371516786059, guid: 2c65b90f2f72b3e44abcbe5101e0f629, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2c65b90f2f72b3e44abcbe5101e0f629, type: 3}
