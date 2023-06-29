@@ -14,6 +14,8 @@ public class Ingredient : MonoBehaviour
     private GameObject prefab;
     private GameObject instantiatedPrefab;
 
+    public string Name;
+
     public delegate void IngredientGrabbed(Ingredient ingredient);
     public static event IngredientGrabbed OnIngredientGrabbed;
     public delegate void IngredientDropped();
