@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6544027332944490753}
   m_Layer: 0
-  m_Name: PlatformBox
+  m_Name: IngredientsDispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5048,4 +5048,3 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ingredientPrefab: {fileID: 0}
-  ingredientScale: 0
