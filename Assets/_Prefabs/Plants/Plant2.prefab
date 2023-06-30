@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6458777931669841392}
   - component: {fileID: 6458777931688636752}
   - component: {fileID: 7614248352532486129}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6458777931669841394}
   - component: {fileID: 6458777931671168464}
   - component: {fileID: 6458777931672266512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VegetationMedium02_02_LOD00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 6458777931669841396}
   - component: {fileID: 6458777931671168466}
   - component: {fileID: 6458777931672266514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VegetationMedium02_02_LOD01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 6458777931669841398}
   - component: {fileID: 6458777931671168468}
   - component: {fileID: 6458777931672266516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VegetationMedium02_02_LOD02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
