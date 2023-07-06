@@ -319,6 +319,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 556925682, guid: 2bac903deef25ce44a6da78f81fd56b9, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253945581589735918, guid: 2bac903deef25ce44a6da78f81fd56b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1311360622052058327, guid: 2bac903deef25ce44a6da78f81fd56b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -384,6 +393,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1355789849857930597, guid: 2bac903deef25ce44a6da78f81fd56b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1357994844791000269, guid: 2bac903deef25ce44a6da78f81fd56b9,
         type: 3}
       propertyPath: m_Convex
@@ -398,6 +412,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4037174242097997993, guid: 2bac903deef25ce44a6da78f81fd56b9,
+        type: 3}
+      propertyPath: m_TurnAmount
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766137283958275653, guid: 2bac903deef25ce44a6da78f81fd56b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893733018717289531, guid: 2bac903deef25ce44a6da78f81fd56b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942800703349940400, guid: 2bac903deef25ce44a6da78f81fd56b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bac903deef25ce44a6da78f81fd56b9, type: 3}
