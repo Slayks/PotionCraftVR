@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 /// <summary>
 /// Class managing the save system. It needs an instance of InventoryManager to work.
@@ -49,8 +49,6 @@ public class SaveManager : MonoBehaviour
         // Get save name
         string saveName = PlayerPrefs.GetString("SaveName");
 
-        Debug.Log(saveName);
-
         // if save name is empty, generate one
         if (string.IsNullOrWhiteSpace(saveName))
         {
@@ -62,6 +60,9 @@ public class SaveManager : MonoBehaviour
 
         // Save inventory to json then to file
         string json = JsonUtility.ToJson(inventoryManager.GetComponent<InventoryManager>());
+
+        // @TODO: REMOVE !!! DEBUG ONLY
+        Debug.Log(json);
 
         System.IO.File.WriteAllText(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName, json);
     }
@@ -93,8 +94,13 @@ public class SaveManager : MonoBehaviour
         
         // Read savefile, deserialize it and set the data to the existing inventory manager
         string json = System.IO.File.ReadAllText(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName);
-        InventoryManager tempInventory = (InventoryManager)JsonUtility.FromJson(json, typeof(InventoryManager));
-        inventoryManager.GetComponent<InventoryManager>().Inventory = tempInventory.Inventory;
-        inventoryManager.GetComponent<InventoryManager>().Recipes = tempInventory.Recipes;
+
+        // @TODO: REMOVE !!! DEBUG ONLY
+        Debug.Log(json);
+
+        var inventory = JsonConvert.DeserializeAnonymousType(json, new { Inventory = new List<IngredientHolder>(), Recipes = new List<Recipe>() });
+
+        inventoryManager.GetComponent<InventoryManager>().Inventory = inventory.Inventory;
+        inventoryManager.GetComponent<InventoryManager>().Recipes = inventory.Recipes;
     }
 }

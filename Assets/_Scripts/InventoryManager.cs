@@ -84,7 +84,7 @@ public class InventoryManager : MonoBehaviour
     /// Adds a recipe to the list of recipes
     /// </summary>
     /// <param name="recipe"></param>
-    public void AddRecipe(Recipe recipe)
+    public void AddRecipeToInventory(Recipe recipe)
     {
         Recipes.Add(recipe);
     }
@@ -93,7 +93,7 @@ public class InventoryManager : MonoBehaviour
     /// Removes a recipe from the list of recipes
     /// </summary>
     /// <param name="recipe"></param>
-    public void RemoveRecipe(Recipe recipe)
+    public void RemoveRecipeFromInventory(Recipe recipe)
     {
         Recipes.Remove(recipe);
     }
