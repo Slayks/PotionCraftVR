@@ -34,7 +34,7 @@ public class DistributeIngredient : XRBaseInteractable
         TMP_Text textMeshPro = this.gameObject.transform.parent.GetComponentInChildren<TMP_Text>();
         int ingredientQuantity = this.inventoryManager.GetIngredientQuantity(this.ingredientPrefab.Name);
         Debug.Log(ingredientQuantity);
-        textMeshPro.text = ingredientQuantity + "/100";
+        textMeshPro.text = ingredientQuantity.ToString();
     }
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
