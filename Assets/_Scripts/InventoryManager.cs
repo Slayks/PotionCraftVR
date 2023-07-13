@@ -26,10 +26,10 @@ public class InventoryManager : MonoBehaviour
     /// Adds an ingredient to the inventory
     /// </summary>
     /// <param name="ingredient"></param>
-    public void AddIngredientToInventory(Ingredient ingredient)
+    public void AddIngredientToInventory(string ingredientName)
     {
         // Check if ingredient is already in inventory
-        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredient.Name);
+        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredientName);
 
         if (ingredientHolder != null)
         {
@@ -39,7 +39,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             // If no, add ingredient to inventory
-            Inventory.Add(new IngredientHolder(ingredient, 1));
+            Inventory.Add(new IngredientHolder(ingredientName, 1));
         }
     }
 
@@ -47,10 +47,10 @@ public class InventoryManager : MonoBehaviour
     /// Removes an ingredient from the inventory
     /// </summary>
     /// <param name="ingredient"></param>
-    public void RemoveIngredientFromInventory(Ingredient ingredient)
+    public void RemoveIngredientFromInventory(string ingredientName)
     {
         // Check if ingredient is already in inventory
-        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredient.Name);
+        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredientName);
 
         if (ingredientHolder != null)
         {

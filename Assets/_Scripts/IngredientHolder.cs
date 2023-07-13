@@ -7,13 +7,12 @@ using UnityEngine;
 /// </summary>
 public class IngredientHolder : MonoBehaviour
 {
-    public Ingredient Ingredient;
+    public string IngredientName;
     public int Quantity;
-    public string IngredientName => Ingredient.Name;
 
-    public IngredientHolder(Ingredient ingredient, int quantity)
+    public IngredientHolder(string ingredientName, int quantity)
     {
-        Ingredient = ingredient;
+        IngredientName = ingredientName;
         Quantity = quantity;
     }
 }
