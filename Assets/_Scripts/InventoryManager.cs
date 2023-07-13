@@ -7,13 +7,36 @@ using UnityEngine;
 /// </summary>
 public class InventoryManager : MonoBehaviour
 {
-    public List<IngredientHolder> Inventory = new List<IngredientHolder>();
-    public List<Recipe> Recipes = new List<Recipe>();
+    public InventoryData InventoryData;
+
+    public List<IngredientHolder> Inventory
+    {
+        get
+        {
+            return InventoryData.Inventory;
+        }
+        set
+        {
+            InventoryData.Inventory = value;
+        }
+    }
+
+    public List<Recipe> Recipes
+    {
+        get
+        {
+            return InventoryData.Recipes;
+        }
+        set
+        {
+            InventoryData.Recipes = value;
+        }
+    }    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        InventoryData = new InventoryData();
     }
 
     // Update is called once per frame
