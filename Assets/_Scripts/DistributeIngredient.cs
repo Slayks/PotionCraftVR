@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class DistributeIngredient : XRBaseInteractable
@@ -16,6 +18,9 @@ public class DistributeIngredient : XRBaseInteractable
     /// </summary>
     private GameObject instantiatedIngredientPrefab;
 
+    [SerializeField]
+    private InventoryManager inventoryManager;
+
     private void Start()
     {
         this.instantiatedIngredientPrefab = Instantiate(ingredientPrefab.GetPrefab(), this.transform);
@@ -25,6 +30,11 @@ public class DistributeIngredient : XRBaseInteractable
         this.instantiatedIngredientPrefab.transform.localScale = new Vector3(newScale, newScale, newScale);
         localPosition.y = -.2f;
         this.instantiatedIngredientPrefab.transform.localPosition = localPosition;
+
+        TMP_Text textMeshPro = this.gameObject.transform.parent.GetComponentInChildren<TMP_Text>();
+        int ingredientQuantity = this.inventoryManager.GetIngredientQuantity(this.ingredientPrefab.Name);
+        Debug.Log(ingredientQuantity);
+        textMeshPro.text = ingredientQuantity + "/100";
     }
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
