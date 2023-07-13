@@ -81,6 +81,21 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the quantity of a given ingredient
+    /// </summary>
+    /// <param name="ingredientName"></param>
+    /// <returns>Quantity of given ingredient</returns>
+    public int GetIngredientQuantity(string ingredientName)
+    {
+        IngredientHolder ingredient = Inventory.Find(Inventory => Inventory.IngredientName == ingredientName);
+
+        if (ingredient != null)
+            return ingredient.Quantity;
+
+        return 0;
+    }
+
+    /// <summary>
     /// Adds a recipe to the list of recipes
     /// </summary>
     /// <param name="recipe"></param>
