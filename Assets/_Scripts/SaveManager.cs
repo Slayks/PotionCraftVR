@@ -59,7 +59,7 @@ public class SaveManager : MonoBehaviour
         }
 
         // Save inventory to json then to file
-        string json = JsonUtility.ToJson(inventoryManager.GetComponent<InventoryManager>());
+        string json = JsonConvert.SerializeObject(inventoryManager.GetComponent<InventoryManager>().InventoryData);
 
         // @TODO: REMOVE !!! DEBUG ONLY
         Debug.Log(json);
@@ -91,16 +91,15 @@ public class SaveManager : MonoBehaviour
             Debug.LogError("Error: Save file " + saveName + " doesn't exist.");
             return;
         }
-        
+
         // Read savefile, deserialize it and set the data to the existing inventory manager
         string json = System.IO.File.ReadAllText(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName);
 
         // @TODO: REMOVE !!! DEBUG ONLY
         Debug.Log(json);
 
-        var inventory = JsonConvert.DeserializeAnonymousType(json, new { Inventory = new List<IngredientHolder>(), Recipes = new List<Recipe>() });
+        var inventory = JsonConvert.DeserializeObject<InventoryData>(json);
 
-        inventoryManager.GetComponent<InventoryManager>().Inventory = inventory.Inventory;
-        inventoryManager.GetComponent<InventoryManager>().Recipes = inventory.Recipes;
+        inventoryManager.GetComponent<InventoryManager>().InventoryData = inventory;
     }
 }
