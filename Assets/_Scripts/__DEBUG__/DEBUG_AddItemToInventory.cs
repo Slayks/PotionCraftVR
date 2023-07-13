@@ -22,12 +22,12 @@ public class DEBUG_AddItemToInventory : MonoBehaviour
 
     public void AddIngredient()
     {
-        InventoryManager.GetComponent<InventoryManager>().AddIngredientToInventory(Ingredient.GetComponent<Ingredient>());
+        InventoryManager.GetComponent<InventoryManager>().AddIngredientToInventory(Ingredient.GetComponent<Ingredient>().Name);
     }
 
     public void RemoveIngredient()
     {
-        InventoryManager.GetComponent<InventoryManager>().RemoveIngredientFromInventory(Ingredient.GetComponent<Ingredient>());
+        InventoryManager.GetComponent<InventoryManager>().RemoveIngredientFromInventory(Ingredient.GetComponent<Ingredient>().Name);
     }
 
     public void AddRecipe()
