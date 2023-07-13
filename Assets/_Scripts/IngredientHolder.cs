@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Contains an ingredient and its quantity
 /// </summary>
-public class IngredientHolder : MonoBehaviour
+public class IngredientHolder
 {
     public string IngredientName;
     public int Quantity;
