@@ -30,17 +30,20 @@ public class Platform : MonoBehaviour
                 Vector3 nodePosition = path[i];
                 Vector3 platformPosition = this.gameObject.transform.position;
                 GameObject node;
-                if (i < path.Count / 2)
-                {
-                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
-                }
-                else
-                {
-                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
-                }
+                // ! [DEMO]
+                //if (i < path.Count / 2)
+                //{
+                node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
+                //}
+                //else
+                //{
+                //    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
+                //}
                 this.displayedPathNodes.Add(node);
             }
-            this.enabledNodeCount = path.Count / 2;
+            // ! [DEMO]
+            //this.enabledNodeCount = path.Count / 2;
+            this.enabledNodeCount = path.Count;
         }
     }
 
@@ -119,9 +122,10 @@ public class Platform : MonoBehaviour
         {
             StartCoroutine(FollowPath(this));
         }
-        if (Input.GetKeyDown(KeyCode.A) && this.isMoving == false)
-        {
-            this.incrementEnabledNode();
-        }
+        // ! [DEMO]
+        //if (Input.GetKeyDown(KeyCode.A) && this.isMoving == false)
+        //{
+        //    this.incrementEnabledNode();
+        //}
     }
 }
