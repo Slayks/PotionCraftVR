@@ -32,12 +32,13 @@ public class SaveManager : MonoBehaviour
         {
             saveNames.Add(saveName);
         }
+
+        VRControllerActionListener.OnLeftControllerPrimaryButtonPressed += SaveGame;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        VRControllerActionListener.OnLeftControllerPrimaryButtonPressed -= SaveGame;
     }
 
     // OnApplicationQuit is called when the application is about to quit
@@ -68,6 +69,8 @@ public class SaveManager : MonoBehaviour
         Debug.Log(json);
 
         System.IO.File.WriteAllText(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName, json);
+
+
     }
 
     // Sets the save name in PlayerPrefs
