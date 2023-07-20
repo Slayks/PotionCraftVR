@@ -19,12 +19,12 @@ public class Platform : MonoBehaviour
 
     void Start()
     {
-        VRControllerActionListener.OnPrimaryButtonPressed += RunFollowPath;
+        VRControllerActionListener.OnRightControllerPrimaryButtonPressed += RunFollowPath;
     }
-
+    
     private void OnDestroy()
     {
-        VRControllerActionListener.OnPrimaryButtonPressed -= RunFollowPath;
+        VRControllerActionListener.OnRightControllerPrimaryButtonPressed -= RunFollowPath;
     }
 
     private void RunFollowPath()

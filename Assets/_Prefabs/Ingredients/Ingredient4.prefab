@@ -84,6 +84,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4230584288330358713, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
         type: 3}
+      propertyPath: Name
+      value: Ingredient4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230584288330358713, guid: 2c65b90f2f72b3e44abcbe5101e0f629,
+        type: 3}
       propertyPath: prefab
       value: 
       objectReference: {fileID: 5012049757418925425, guid: a9bbeabb3c1e95245b4d9592ee4bad68,
