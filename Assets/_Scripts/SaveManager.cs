@@ -17,6 +17,9 @@ public class SaveManager : MonoBehaviour
     private List<string> saveNames = new List<string>();
     private readonly string MyDocumentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 
+    [SerializeField]
+    private List<Ingredient> allIngredientsList = new List<Ingredient>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +85,14 @@ public class SaveManager : MonoBehaviour
         if (string.IsNullOrWhiteSpace(saveName))
         {
             Debug.Log("Save name is empty, treat the run as a new run.");
+
+            InventoryData inventoryData = new InventoryData();
+            allIngredientsList.ForEach((ingredient) =>
+            {
+                IngredientHolder ingredientHolder = new IngredientHolder(ingredient.Name, 10);
+                inventoryData.Inventory.Add(ingredientHolder);
+            });
+            inventoryManager.GetComponent<InventoryManager>().InventoryData = inventoryData;
             return;
         }
 

@@ -17,6 +17,21 @@ public class Platform : MonoBehaviour
     private bool isMoving = false;
     private float speed = 5f;
 
+    void Start()
+    {
+        VRControllerActionListener.OnPrimaryButtonPressed += RunFollowPath;
+    }
+
+    private void OnDestroy()
+    {
+        VRControllerActionListener.OnPrimaryButtonPressed -= RunFollowPath;
+    }
+
+    private void RunFollowPath()
+    {
+        StartCoroutine(FollowPath(this));
+    }
+
     /// <summary>
     /// If the platform is not moving, display the path (Vector3 list) that the platform will follow when calling FollowPath
     /// </summary>
@@ -30,17 +45,20 @@ public class Platform : MonoBehaviour
                 Vector3 nodePosition = path[i];
                 Vector3 platformPosition = this.gameObject.transform.position;
                 GameObject node;
-                if (i < path.Count / 2)
-                {
-                    node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
-                }
-                else
-                {
-                    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
-                }
+                // ! [DEMO]
+                //if (i < path.Count / 2)
+                //{
+                node = Instantiate(enabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
+                //}
+                //else
+                //{
+                //    node = Instantiate(disabledNodePrefab, new Vector3(platformPosition.x + nodePosition.x, platformPosition.y - 5, platformPosition.z + nodePosition.z), Quaternion.identity);
+                //}
                 this.displayedPathNodes.Add(node);
             }
-            this.enabledNodeCount = path.Count / 2;
+            // ! [DEMO]
+            //this.enabledNodeCount = path.Count / 2;
+            this.enabledNodeCount = path.Count;
         }
     }
 
@@ -110,18 +128,5 @@ public class Platform : MonoBehaviour
             platform.isMoving = false;
         }
         yield return new WaitForEndOfFrame();
-    }
-
-    // TEMP à supprimer
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && this.isMoving == false)
-        {
-            StartCoroutine(FollowPath(this));
-        }
-        if (Input.GetKeyDown(KeyCode.A) && this.isMoving == false)
-        {
-            this.incrementEnabledNode();
-        }
     }
 }
