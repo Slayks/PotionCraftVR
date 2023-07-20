@@ -17,6 +17,21 @@ public class Platform : MonoBehaviour
     private bool isMoving = false;
     private float speed = 5f;
 
+    void Start()
+    {
+        VRControllerActionListener.OnPrimaryButtonPressed += RunFollowPath;
+    }
+
+    private void OnDestroy()
+    {
+        VRControllerActionListener.OnPrimaryButtonPressed -= RunFollowPath;
+    }
+
+    private void RunFollowPath()
+    {
+        StartCoroutine(FollowPath(this));
+    }
+
     /// <summary>
     /// If the platform is not moving, display the path (Vector3 list) that the platform will follow when calling FollowPath
     /// </summary>
@@ -113,19 +128,5 @@ public class Platform : MonoBehaviour
             platform.isMoving = false;
         }
         yield return new WaitForEndOfFrame();
-    }
-
-    // TEMP à supprimer
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && this.isMoving == false)
-        {
-            StartCoroutine(FollowPath(this));
-        }
-        // ! [DEMO]
-        //if (Input.GetKeyDown(KeyCode.A) && this.isMoving == false)
-        //{
-        //    this.incrementEnabledNode();
-        //}
     }
 }
