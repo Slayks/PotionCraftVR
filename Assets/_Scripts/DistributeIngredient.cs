@@ -46,10 +46,13 @@ public class DistributeIngredient : XRBaseInteractable
 
     private void CreateAndSelectIngredient(SelectEnterEventArgs args)
     {
-        Ingredient ingredient = CreateIngredient(args.interactorObject.transform);
-        interactionManager.SelectEnter(args.interactorObject, ingredient);
-        inventoryManager.RemoveIngredientFromInventory(ingredient.Name);
-        textMeshPro.text = this.inventoryManager.GetIngredientQuantity(ingredient.Name).ToString();
+        if (this.inventoryManager.GetIngredientQuantity(this.ingredientPrefab.Name) > 0)
+        {
+            Ingredient ingredient = CreateIngredient(args.interactorObject.transform);
+            interactionManager.SelectEnter(args.interactorObject, ingredient);
+            inventoryManager.RemoveIngredientFromInventory(ingredient.Name);
+            textMeshPro.text = this.inventoryManager.GetIngredientQuantity(ingredient.Name).ToString();
+        }
     }
 
     private Ingredient CreateIngredient(Transform transform)
