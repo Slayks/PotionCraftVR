@@ -22,11 +22,16 @@ public class Teleportation : MonoBehaviour
         SceneManager.LoadScene("MoveInFog");
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.tag == "Player")
         {
+            Debug.Log("collisioon");
             LoadLevel();
+        }
+        else
+        {
+            Debug.Log("test");
         }
     }
 }
