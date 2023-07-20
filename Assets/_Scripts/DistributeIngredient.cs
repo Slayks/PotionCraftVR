@@ -21,6 +21,8 @@ public class DistributeIngredient : XRBaseInteractable
     [SerializeField]
     private InventoryManager inventoryManager;
 
+    private TMP_Text textMeshPro;
+
     private void Start()
     {
         this.instantiatedIngredientPrefab = Instantiate(ingredientPrefab.GetPrefab(), this.transform);
@@ -31,9 +33,8 @@ public class DistributeIngredient : XRBaseInteractable
         localPosition.y = -.2f;
         this.instantiatedIngredientPrefab.transform.localPosition = localPosition;
 
-        TMP_Text textMeshPro = this.gameObject.transform.parent.GetComponentInChildren<TMP_Text>();
+        textMeshPro = this.gameObject.transform.parent.GetComponentInChildren<TMP_Text>();
         int ingredientQuantity = this.inventoryManager.GetIngredientQuantity(this.ingredientPrefab.Name);
-        Debug.Log(ingredientQuantity);
         textMeshPro.text = ingredientQuantity.ToString();
     }
 
@@ -47,6 +48,8 @@ public class DistributeIngredient : XRBaseInteractable
     {
         Ingredient ingredient = CreateIngredient(args.interactorObject.transform);
         interactionManager.SelectEnter(args.interactorObject, ingredient);
+        inventoryManager.RemoveIngredientFromInventory(ingredient.Name);
+        textMeshPro.text = this.inventoryManager.GetIngredientQuantity(ingredient.Name).ToString();
     }
 
     private Ingredient CreateIngredient(Transform transform)

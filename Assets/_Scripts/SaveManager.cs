@@ -56,7 +56,7 @@ public class SaveManager : MonoBehaviour
         // if save name is empty, generate one
         if (string.IsNullOrWhiteSpace(saveName))
         {
-            saveName = "save" + (saveNames.Count + 1).ToString("000") + ".json";
+            saveName = "save001.json";
 
             // Also save saveName in PlayerPrefs in case the player continues playing.
             PlayerPrefs.SetString("SaveName", saveName);
@@ -83,10 +83,12 @@ public class SaveManager : MonoBehaviour
     public void LoadGame()
     {
         // Get save name
-        string saveName = PlayerPrefs.GetString("SaveName");
+        string saveName = "save001.json";
 
-        if (string.IsNullOrWhiteSpace(saveName))
+        // Check if the save exists
+        if (!System.IO.File.Exists(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName))
         {
+
             Debug.Log("Save name is empty, treat the run as a new run.");
 
             InventoryData inventoryData = new InventoryData();
@@ -96,13 +98,6 @@ public class SaveManager : MonoBehaviour
                 inventoryData.Inventory.Add(ingredientHolder);
             });
             inventoryManager.GetComponent<InventoryManager>().InventoryData = inventoryData;
-            return;
-        }
-
-        // Check if the save exists
-        if (!System.IO.File.Exists(MyDocumentsPath + "/PotionCraftVR/Saves/" + saveName))
-        {
-            Debug.LogError("Error: Save file " + saveName + " doesn't exist.");
             return;
         }
 
