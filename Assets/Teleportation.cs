@@ -5,33 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Teleportation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
+    [SerializeField]
+    private string sceneName;
 
     void LoadLevel()
     {
-        SceneManager.LoadScene("MoveInFog");
+        SceneManager.LoadScene(sceneName);
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("collisioon");
             LoadLevel();
-        }
-        else
-        {
-            Debug.Log("test");
         }
     }
 }
