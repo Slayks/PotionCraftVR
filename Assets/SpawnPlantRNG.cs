@@ -14,8 +14,8 @@ public class SpawnPlantRNG : MonoBehaviour
     private List<GameObject> plant4;
     [SerializeField]
     private List<GameObject> plant5;
-    [SerializeField]
-    private List<GameObject> plant6;
+    //[SerializeField]
+    //private List<GameObject> plant6;
     [SerializeField]
     private List<GameObject> plant7;
     [SerializeField]
@@ -29,7 +29,7 @@ public class SpawnPlantRNG : MonoBehaviour
         Spawn(plant3);
         Spawn(plant4);
         Spawn(plant5);
-        Spawn(plant6);
+        //Spawn(plant6);
         Spawn(plant7);
         Spawn(plant8);
     }
