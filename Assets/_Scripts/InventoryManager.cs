@@ -7,13 +7,36 @@ using UnityEngine;
 /// </summary>
 public class InventoryManager : MonoBehaviour
 {
-    public List<IngredientHolder> Inventory = new List<IngredientHolder>();
-    public List<Recipe> Recipes = new List<Recipe>();
+    public InventoryData InventoryData;
+
+    public List<IngredientHolder> Inventory
+    {
+        get
+        {
+            return InventoryData.Inventory;
+        }
+        set
+        {
+            InventoryData.Inventory = value;
+        }
+    }
+
+    public List<Recipe> Recipes
+    {
+        get
+        {
+            return InventoryData.Recipes;
+        }
+        set
+        {
+            InventoryData.Recipes = value;
+        }
+    }    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        InventoryData = new InventoryData();
     }
 
     // Update is called once per frame
@@ -26,10 +49,10 @@ public class InventoryManager : MonoBehaviour
     /// Adds an ingredient to the inventory
     /// </summary>
     /// <param name="ingredient"></param>
-    public void AddIngredientToInventory(Ingredient ingredient)
+    public void AddIngredientToInventory(string ingredientName)
     {
         // Check if ingredient is already in inventory
-        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredient.Name);
+        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredientName);
 
         if (ingredientHolder != null)
         {
@@ -39,7 +62,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             // If no, add ingredient to inventory
-            Inventory.Add(new IngredientHolder(ingredient, 1));
+            Inventory.Add(new IngredientHolder(ingredientName, 1));
         }
     }
 
@@ -47,10 +70,10 @@ public class InventoryManager : MonoBehaviour
     /// Removes an ingredient from the inventory
     /// </summary>
     /// <param name="ingredient"></param>
-    public void RemoveIngredientFromInventory(Ingredient ingredient)
+    public void RemoveIngredientFromInventory(string ingredientName)
     {
         // Check if ingredient is already in inventory
-        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredient.Name);
+        IngredientHolder ingredientHolder = Inventory.Find(i => i.IngredientName == ingredientName);
 
         if (ingredientHolder != null)
         {
@@ -81,10 +104,25 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the quantity of a given ingredient
+    /// </summary>
+    /// <param name="ingredientName"></param>
+    /// <returns>Quantity of given ingredient</returns>
+    public int GetIngredientQuantity(string ingredientName)
+    {
+        IngredientHolder ingredient = Inventory.Find(Inventory => Inventory.IngredientName == ingredientName);
+
+        if (ingredient != null)
+            return ingredient.Quantity;
+
+        return 0;
+    }
+
+    /// <summary>
     /// Adds a recipe to the list of recipes
     /// </summary>
     /// <param name="recipe"></param>
-    public void AddRecipe(Recipe recipe)
+    public void AddRecipeToInventory(Recipe recipe)
     {
         Recipes.Add(recipe);
     }
@@ -93,7 +131,7 @@ public class InventoryManager : MonoBehaviour
     /// Removes a recipe from the list of recipes
     /// </summary>
     /// <param name="recipe"></param>
-    public void RemoveRecipe(Recipe recipe)
+    public void RemoveRecipeFromInventory(Recipe recipe)
     {
         Recipes.Remove(recipe);
     }

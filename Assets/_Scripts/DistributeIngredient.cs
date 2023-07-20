@@ -16,14 +16,15 @@ public class DistributeIngredient : XRBaseInteractable
     /// </summary>
     private GameObject instantiatedIngredientPrefab;
 
-    [SerializeField]
-    private float ingredientScale;
-
     private void Start()
     {
         this.instantiatedIngredientPrefab = Instantiate(ingredientPrefab.GetPrefab(), this.transform);
-        Vector3 scale = this.instantiatedIngredientPrefab.transform.localScale;
-        this.instantiatedIngredientPrefab.transform.localScale = new Vector3(scale.x * ingredientScale, scale.y * ingredientScale, scale.z * ingredientScale);
+        Vector3 localScale = this.instantiatedIngredientPrefab.transform.localScale;
+        Vector3 localPosition = this.instantiatedIngredientPrefab.transform.localPosition;
+        float newScale = localScale.x * 3;
+        this.instantiatedIngredientPrefab.transform.localScale = new Vector3(newScale, newScale, newScale);
+        localPosition.y = -.2f;
+        this.instantiatedIngredientPrefab.transform.localPosition = localPosition;
     }
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
