@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Content.Interaction;
@@ -26,6 +27,7 @@ public class Ingredient : XRGrabInteractable
     protected override void Awake()
     {
         base.Awake();
+        this.Name = prefab.name;
         this.instantiatedPrefab = Instantiate(prefab, this.transform);
         this.colliders.Add(this.instantiatedPrefab.GetComponent<Collider>());
         this.selectEntered.AddListener(EmitGrabbedEvent);
