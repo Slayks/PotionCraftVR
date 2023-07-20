@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Teleportation : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class Teleportation : MonoBehaviour
        
     }
 
+    void LoadLevel()
+    {
+        SceneManager.LoadScene("MoveInFog");
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "")
+        if (collision.gameObject.tag == "Player")
         {
-
+            LoadLevel();
         }
     }
 }
